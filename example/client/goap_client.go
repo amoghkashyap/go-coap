@@ -2,23 +2,30 @@ package main
 
 import (
 	"log"
-	"os"
-
 	"github.com/amoghkashyap/go-coap"
+	"strconv"
+)
+
+var(
+	temperature = "26"
+	path = ""
 )
 
 func main() {
 
+	//Read temperature here
+	temperatureInt,_ := strconv.Atoi(temperature)
 	req := coap.Message{
 		Type:      coap.Confirmable,
 		Code:      coap.GET,
 		MessageID: 12345,
-		Payload:   []byte("Hello"),
+		Payload:   []byte(temperature),
 	}
 
-	path := "/a"
-	if len(os.Args) > 1 {
-		path = os.Args[1]
+	if temperatureInt >= 23{
+	path = "/a"
+	} else{
+	path = "/b"
 	}
 
 	req.SetOption(coap.ETag, "weetag")
