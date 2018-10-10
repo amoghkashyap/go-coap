@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/dustin/go-coap"
+	"github.com/amoghkashyap/go-coap"
 )
 
 func main() {
@@ -13,10 +13,10 @@ func main() {
 		Type:      coap.Confirmable,
 		Code:      coap.GET,
 		MessageID: 12345,
-		Payload:   []byte("hello, world!"),
+		Payload:   []byte("Hello"),
 	}
 
-	path := "/some/path"
+	path := "/a"
 	if len(os.Args) > 1 {
 		path = os.Args[1]
 	}

@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/dustin/go-coap"
+	"github.com/amoghkashyap/go-coap"
 )
 
 func handleA(l *net.UDPConn, a *net.UDPAddr, m *coap.Message) *coap.Message {
@@ -15,7 +15,7 @@ func handleA(l *net.UDPConn, a *net.UDPAddr, m *coap.Message) *coap.Message {
 			Code:      coap.Content,
 			MessageID: m.MessageID,
 			Token:     m.Token,
-			Payload:   []byte("hello to you!"),
+			Payload:   []byte(string(m.Payload)+" world"),
 		}
 		res.SetOption(coap.ContentFormat, coap.TextPlain)
 
@@ -48,5 +48,6 @@ func main() {
 	mux.Handle("/a", coap.FuncHandler(handleA))
 	mux.Handle("/b", coap.FuncHandler(handleB))
 
+	log.Println("thukaali server started")
 	log.Fatal(coap.ListenAndServe("udp", ":5683", mux))
 }
